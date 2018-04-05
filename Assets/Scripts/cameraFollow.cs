@@ -10,10 +10,10 @@ public class cameraFollow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		print(player);
 
 	}
 	private void LateUpdate() {
+	
 	transform.position = player.transform.position;		
 	}
 }
