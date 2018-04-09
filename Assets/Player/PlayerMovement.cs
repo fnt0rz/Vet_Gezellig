@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour {
     static Animator animator;
     float translation;
     [SerializeField] bool isGrounded;
-    [SerializeField] float yVelocity;
     bool facingRight;
     int jumpCount;
 
@@ -41,8 +40,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         PlayerJump();  
         RunningAnimation();      
-        yVelocity = playerBody.velocity.y;
-        
     }
 
     void FixedUpdate() 
@@ -62,7 +59,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void flipPlayer()
     {
-        if (translation > 0 && !facingRight || translation < 0 && facingRight)
+        if (translation > 0 && !facingRight || translation < 0 && facingRight) //TODO: FIX rotation
         {
             facingRight = !facingRight;
             Vector3 localScale = transform.localScale;

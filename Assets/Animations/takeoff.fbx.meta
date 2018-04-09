@@ -89,7 +89,7 @@ ModelImporter:
     - serializedVersion: 16
       name: takeoff
       takeName: mixamo.com
-      firstFrame: 15
+      firstFrame: 14
       lastFrame: 22
       wrapMode: 0
       orientationOffsetY: 0

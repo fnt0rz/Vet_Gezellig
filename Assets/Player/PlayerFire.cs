@@ -17,6 +17,7 @@ public class PlayerFire : MonoBehaviour {
 		
 		if (CrossPlatformInputManager.GetButtonDown("Fire1"))
 		{
+			print("fire");
 			weaponFire.Play();
 		}	
 
