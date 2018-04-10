@@ -7,11 +7,10 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerMovement : MonoBehaviour {
 
     public float speed = 10.0F;
-    [SerializeField] float controllSpeed = 1f;
     [SerializeField] float jumpPower = 12f;
     Rigidbody playerBody;
     static Animator animator;
-    float translation;
+    public float translation;
     [SerializeField] bool isGrounded;
     bool facingRight;
     int jumpCount;
@@ -27,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 	playerBody = GetComponent<Rigidbody>();
 	
 	}
-	void OnCollisionEnter(Collision playerCollider) {
+	void OnCollisionEnter(Collision playerCollider) { //FIXME: Needs to be fixed with head
 		if (!isGrounded)
 		{
 			isGrounded = true;
@@ -53,7 +52,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void InputTranslator()
     {
-        translation = Input.GetAxis("Horizontal") * speed;
+        translation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         MovementHandeler();
     }
 
@@ -61,10 +60,20 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (translation > 0 && !facingRight || translation < 0 && facingRight) //TODO: FIX rotation
         {
-            facingRight = !facingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.z *= -1;
-            transform.localScale = (localScale);
+            switch (facingRight)
+            {
+                case true:
+                transform.rotation = Quaternion.Euler(transform.rotation.x,270f,transform.rotation.z);
+                facingRight = !facingRight;
+                break;
+                case false:
+                transform.rotation = Quaternion.Euler(transform.rotation.x,90f,transform.rotation.z);
+                facingRight = !facingRight;
+                break;
+                default:
+                break;
+            }
+
         }
     }
 
@@ -86,9 +95,8 @@ public class PlayerMovement : MonoBehaviour {
         {   
             animator.SetBool("isLanding", true);
         }
-
-        translation *= Time.deltaTime;
-        transform.Translate(0, 0, translation);
+        var rawXPos = transform.position.x + translation;
+        transform.position = new Vector3(rawXPos,transform.position.y,transform.position.z);
 
     }
 

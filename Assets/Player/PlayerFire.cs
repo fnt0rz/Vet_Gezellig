@@ -5,11 +5,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerFire : MonoBehaviour {
 	
-	[SerializeField] ParticleSystem weaponFire;
+	[SerializeField] GameObject weaponFire;
+	[SerializeField] int forwardForce = 50;
+	[SerializeField] Transform fireLocation;
 
 	// Use this for initialization
 	void Start () {
-		
+	
 	}
 	
 	// Update is called once per frame
@@ -17,8 +19,10 @@ public class PlayerFire : MonoBehaviour {
 		
 		if (CrossPlatformInputManager.GetButtonDown("Fire1"))
 		{
-			print("fire");
-			weaponFire.Play();
+			var fireball = Instantiate(weaponFire,fireLocation.position,transform.localRotation);
+			var rigidbody = fireball.GetComponent<Rigidbody>();
+			print(rigidbody);
+			rigidbody.AddForce(transform.forward * forwardForce);
 		}	
 
 	}
