@@ -6,12 +6,12 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float speed = 10.0F;
+    public bool isGrounded;
+    [SerializeField] float speed = 10.0F;
     [SerializeField] float jumpPower = 12f;
     Rigidbody playerBody;
     static Animator animator;
     public float translation;
-    [SerializeField] bool isGrounded;
     bool facingRight;
     int jumpCount;
 
