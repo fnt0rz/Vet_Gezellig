@@ -13,4 +13,17 @@ public class PlayerStats : MonoBehaviour {
 			return currentHealthPoints / (float)maxHealthPoints;
 		}
 	}
+
+	public void PlayerHit(float damage){
+		if (currentHealthPoints <= damage)
+		{
+			print("Player killed");
+			//KillPlayer()
+		}
+		else
+		{
+			currentHealthPoints -= damage;
+		}
+	}
+
 }
