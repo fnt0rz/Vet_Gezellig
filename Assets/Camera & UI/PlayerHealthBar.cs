@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,14 @@ public class PlayerHealthBar : MonoBehaviour {
     {
         player = FindObjectOfType<PlayerStats>();
         healthBarRawImage = GetComponent<RawImage>();
+        SetLives();
+    }
+
+    private void SetLives()
+    {
+        var livesUI = FindObjectOfType<Text>();
+        livesUI.text = "LIVES: " + player.currentLives.ToString();
+
     }
 
     // Update is called once per frame

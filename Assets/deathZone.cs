@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class deathZone : MonoBehaviour {
+public class DeathZone : MonoBehaviour {
 	PlayerStats	player;
 
 	private void Start() {
