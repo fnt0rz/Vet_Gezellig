@@ -20,7 +20,7 @@ public class PlayerFire : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (CrossPlatformInputManager.GetButtonDown("Fire1") && GetComponent<PlayerMovement>().isGrounded)
+		if (CrossPlatformInputManager.GetButtonDown("Fire2") && GetComponent<PlayerMovement>().isGrounded)
         {
             animator.SetTrigger("isFiring");
 		}

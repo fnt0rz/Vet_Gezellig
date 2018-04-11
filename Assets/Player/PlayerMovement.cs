@@ -93,6 +93,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (playerBody.velocity.y < -1)
         {   
+            isGrounded = false;
             animator.SetBool("isLanding", true);
         }
         var rawXPos = transform.position.x + translation;
