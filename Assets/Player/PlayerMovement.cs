@@ -7,13 +7,12 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerMovement : MonoBehaviour {
 
     public bool isGrounded;
-    [SerializeField] float speed = 10.0F;
-    [SerializeField] float jumpPower = 12f;
+    public float speed = 10.0F;
+    public float jumpPower = 12f;
     Rigidbody playerBody;
     static Animator animator;
     public float translation;
     bool facingRight;
-    int jumpCount;
     public bool moveEnabled = true;
 
 
@@ -31,7 +30,6 @@ public class PlayerMovement : MonoBehaviour {
 		if (!isGrounded)
 		{
 			isGrounded = true;
-            jumpCount = 1;
             animator.ResetTrigger("isJumping");
             animator.SetBool("isLanding", false);
 		}
@@ -108,9 +106,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void PlayerJump()
     {
-        if (CrossPlatformInputManager.GetButtonDown("Jump") && isGrounded && jumpCount > 0)
+        if (CrossPlatformInputManager.GetButtonDown("Jump") && isGrounded && moveEnabled)
         {   
-            jumpCount -= 1;
             animator.SetTrigger("isJumping");
             playerBody.velocity = new Vector3(playerBody.velocity.x,jumpPower,playerBody.velocity.z);
 			isGrounded = false;

@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour {
 	CollisionHandler collisionHandler;
 	bool subscribed;
 
-
+	private void Start() {
+		gameObject.tag = "Enemy";
+	}
 
     private void HitHandler (GameObject hit, float damage)
     {
