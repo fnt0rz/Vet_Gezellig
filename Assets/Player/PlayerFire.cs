@@ -10,6 +10,7 @@ public class PlayerFire : MonoBehaviour {
 	[SerializeField] Transform fireLocation;
 	Animator animator;
 	PlayerMovement playerMovement;
+	public bool fireEnabled = true;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +21,7 @@ public class PlayerFire : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (CrossPlatformInputManager.GetButtonDown("Fire2") && GetComponent<PlayerMovement>().isGrounded)
+		if (CrossPlatformInputManager.GetButtonDown("Fire2") && GetComponent<PlayerMovement>().isGrounded && fireEnabled)
         {
             animator.SetTrigger("isFiring");
 		}
@@ -32,6 +33,6 @@ public class PlayerFire : MonoBehaviour {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
 		projectileBody.AddForce(transform.forward * forwardForce);
-        Destroy(projectile, 2f);
+        Destroy(projectile, 1f);
     }
 }

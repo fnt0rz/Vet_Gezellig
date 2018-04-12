@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
     public float translation;
     bool facingRight;
     int jumpCount;
+    public bool moveEnabled = true;
 
 
     private void Awake() {
@@ -52,8 +53,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private void InputTranslator()
     {
-        translation = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        MovementHandeler();
+        if (moveEnabled)
+        {
+            translation = Input.GetAxis("Horizontal") * speed;
+            MovementHandeler();
+        }
+
     }
 
     private void flipPlayer()
@@ -96,8 +101,8 @@ public class PlayerMovement : MonoBehaviour {
             isGrounded = false;
             animator.SetBool("isLanding", true);
         }
-        var rawXPos = transform.position.x + translation;
-        transform.position = new Vector3(rawXPos,transform.position.y,transform.position.z);
+
+        playerBody.velocity = new Vector3(translation,playerBody.velocity.y,playerBody.velocity.z);
 
     }
 

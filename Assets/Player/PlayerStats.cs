@@ -33,7 +33,9 @@ public class PlayerStats : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
+		else {
 			DontDestroyOnLoad(gameObject);
+		}
 	}
 
 	public void PlayerHit(float damage){

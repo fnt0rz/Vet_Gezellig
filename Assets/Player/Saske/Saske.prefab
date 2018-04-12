@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 54678477860444040}
   - component: {fileID: 114154377354221858}
   - component: {fileID: 114395354684905966}
-  - component: {fileID: 114666941403093726}
   m_Layer: 0
   m_Name: Saske
   m_TagString: Untagged
@@ -70,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1398269844090180}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: -1.3330032, y: 0.5, z: 0.1027379}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4683202437409640}
@@ -162,6 +161,7 @@ MonoBehaviour:
   weaponFire: {fileID: 1439559344910710, guid: 820adfa1cb0ebc64eb97c7ae7fbc07a1, type: 2}
   forwardForce: 500
   fireLocation: {fileID: 4834168603953176}
+  fireEnabled: 1
 --- !u!114 &114395354684905966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,18 +177,7 @@ MonoBehaviour:
   speed: 6
   jumpPower: 6
   translation: 0
---- !u!114 &114666941403093726
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1398269844090180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f937ea39c5f237f418aa86a3e865818a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealthPoints: 3
+  moveEnabled: 1
 --- !u!137 &137969121455140306
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

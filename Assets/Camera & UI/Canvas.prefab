@@ -157,7 +157,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: bcd965549b0971b42a5339609f36ac81, type: 3}
-    m_FontSize: 10
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lives
+  m_Text: 'LIVES: 999'
 --- !u!114 &114703248576273132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,7 +282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100.6, y: -43.2}
+  m_AnchoredPosition: {x: 100, y: -43.2}
   m_SizeDelta: {x: 182.2, y: 54.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224300460810995056
@@ -339,7 +339,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100.85, y: -100.6}
+  m_AnchoredPosition: {x: 100, y: -100.6}
   m_SizeDelta: {x: 181.7, y: 41.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &225512295667633046

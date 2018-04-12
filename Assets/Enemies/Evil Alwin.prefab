@@ -19,15 +19,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4535027524816030}
-  - component: {fileID: 95793803787816356}
   - component: {fileID: 54243974568156472}
   - component: {fileID: 65067366762571134}
-  - component: {fileID: 114931810012986924}
-  - component: {fileID: 114780112542791180}
-  - component: {fileID: 114747583649288306}
+  - component: {fileID: 114777658408831456}
   m_Layer: 0
-  m_Name: TinyAlwin
-  m_TagString: Player
+  m_Name: Evil Alwin
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1103637997860838}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 2.4061818, y: 0.51142204, z: 0}
   m_LocalScale: {x: 1.0000114, y: 1, z: 1.0000114}
   m_Children:
   - {fileID: 4620936470614674}
@@ -87,7 +84,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
@@ -97,30 +94,13 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1103637997860838}
-  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.9044812, y: 0.8493436, z: 0.52240646}
   m_Center: {x: 0.0036738515, y: 0.40262905, z: -0.003673792}
---- !u!95 &95793803787816356
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1103637997860838}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: eb550da0ee206644a9fc7e18ca5296f6, type: 3}
-  m_Controller: {fileID: 9100000, guid: cf58cebbde9c4154e938afcf9894ba8f, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 0
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114747583649288306
+--- !u!114 &114777658408831456
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -128,42 +108,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1103637997860838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f937ea39c5f237f418aa86a3e865818a, type: 3}
+  m_Script: {fileID: 11500000, guid: e43db733395157b4bb36869c2ea8f06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 3
-  playerLives: 1
---- !u!114 &114780112542791180
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1103637997860838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8f360715c69a4f41a9bf144d4cc31db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponFire: {fileID: 1439559344910710, guid: 820adfa1cb0ebc64eb97c7ae7fbc07a1, type: 2}
-  forwardForce: 500
-  fireLocation: {fileID: 0}
-  fireEnabled: 1
---- !u!114 &114931810012986924
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1103637997860838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b5d80442fbe174ab29d684ac9b48bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrounded: 1
-  speed: 6
-  jumpPower: 6
-  translation: 0
-  moveEnabled: 1
+  enemyHealth: 3
 --- !u!137 &137148919274575256
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
