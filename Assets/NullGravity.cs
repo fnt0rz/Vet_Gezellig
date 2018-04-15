@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class NullGravity : MonoBehaviour {
 
+	bool attached = false;
+
+	private void Start() {
+		
+	}
+
 	void OnCollisionEnter(Collision other) {
-		if(other.transform.tag == "Player")	
+		if(other.transform.tag == "Player" && !attached)	
 		{
+			var nullZone = new GameObject();
+			nullZone.transform.parent = gameObject.transform;
 			var playerBody = FindObjectOfType<PlayerMovement>();
 			playerBody.GetComponent<Rigidbody>().useGravity = false;
-			playerBody.transform.localRotation = Quaternion.Euler(180f,transform.localRotation.y,transform.localRotation.z);
-			playerBody.transform.parent = gameObject.transform;
+			playerBody.transform.parent = nullZone.transform;
+			playerBody.transform.localRotation = Quaternion.Euler(180f,playerBody.transform.localRotation.y,playerBody.transform.localRotation.z);
+
+			attached = true;	
 
 		}
 	}
@@ -21,7 +31,7 @@ public class NullGravity : MonoBehaviour {
 			other.transform.parent = null;
 
 		}
-	} */
-		
+	} 
+		 */
 }
 
