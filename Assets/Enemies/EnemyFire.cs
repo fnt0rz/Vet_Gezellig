@@ -8,40 +8,48 @@ public class EnemyFire : MonoBehaviour {
 	[SerializeField] float attackRadius = 10f;
 	[SerializeField] GameObject projectileToFire;
 	[SerializeField] float forwardForce = 50f;
-	GameObject player;
 	[SerializeField] float fireRate = 0.5f;
 	[SerializeField] float nextFire = 0f;
 	[SerializeField] GameObject aimFor;
     [SerializeField] float destroyTime = 1.5f;
+	GameObject player;
+	PlayerStats playerStats;
 
     private void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
-		
-
+		playerStats = FindObjectOfType<PlayerStats>();
+	
 	}
 
 	private void Update() {
-		DistanceChecker();
+		FireChecker();
 	}
 
-    private void DistanceChecker()
+    private void FireChecker()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= attackRadius && Time.time > nextFire)
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackRadius && playerStats.playerIsAlive)
 		{
-
-			print("Starting to fire!" + gameObject.name);
-			FireProjectile();
-			nextFire = Time.time + fireRate;
+			fireRateHandler();
+			
 		}
 	}
 
-    private void FireProjectile()
+    private void fireRateHandler()
     {
-		transform.LookAt(aimFor.transform);
-       	var projectile = Instantiate(projectileToFire,transform.position,transform.rotation);
+		if (Time.time > nextFire) {
+        fireProjectile();
+        nextFire = Time.time + fireRate;
+		}
+    }
+
+    private void fireProjectile()
+    {
+
+        transform.LookAt(aimFor.transform);
+        var projectile = Instantiate(projectileToFire, transform.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
-		projectile.tag = "Projectile";
-		projectileBody.AddForce(transform.forward * forwardForce);
+        projectile.GetComponent<CollisionHandler>().isEnemy = true;
+        projectileBody.AddForce(transform.forward * forwardForce);
         Destroy(projectile, destroyTime);
     }
 

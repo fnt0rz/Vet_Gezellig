@@ -10,8 +10,8 @@ public class SceneLoader : MonoBehaviour {
 	ScreenFade screenFade;
 
 	private void Start() {
-		
 		playerStats = FindObjectOfType<PlayerStats>();
+		playerStats.playerIsAlive = true;
 		playerStats.playerDeath += RespawnHandler;
 	}
 

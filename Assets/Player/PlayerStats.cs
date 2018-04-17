@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour {
 
 	[SerializeField] float maxHealthPoints = 3f;
-	float currentHealthPoints = 3f;
 	[SerializeField] float playerLives = 1f;
+	float currentHealthPoints = 3f;
+	public bool playerIsAlive = true;
 
 	public delegate void PlayerDeath(float remainingLives);
 	public event PlayerDeath playerDeath;
@@ -37,6 +38,7 @@ public class PlayerStats : MonoBehaviour {
 			DontDestroyOnLoad(gameObject);
 		}
 	}
+	
 
 	public void PlayerHit(float damage){
 		if (currentHealthPoints <= damage)
@@ -53,10 +55,10 @@ public class PlayerStats : MonoBehaviour {
     private void KillPlayer()
     {
 		// play deathanimation --> Animator
+		playerIsAlive = false;
 		playerDeath(playerLives);
 		playerLives--;	
-		currentHealthPoints = 3f;
-
+		currentHealthPoints = maxHealthPoints;
     }
 
 }

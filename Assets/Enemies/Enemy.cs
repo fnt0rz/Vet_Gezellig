@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour {
     void Update () {
 	
 		collisionHandler = FindObjectOfType<CollisionHandler>();
-		if (collisionHandler != null && !subscribed)
+		if (collisionHandler != null && !subscribed && !collisionHandler.isEnemy)
 		{	
 			subscribed = true;
 			collisionHandler.enemyHit += HitHandler;

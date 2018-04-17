@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4087067622707530}
   - component: {fileID: 54119341929858176}
   - component: {fileID: 135547052959553192}
+  - component: {fileID: 114492378455919420}
   m_Layer: 0
   m_Name: Fireball_Blue
   m_TagString: Untagged
@@ -242,6 +243,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114492378455919420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1439559344910710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c25ac7210143647b778954c7d34907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 1762959494425262, guid: c255e72e1b4c15a41b602e826d0b7afa, type: 2}
+  isEnemy: 0
+  isAlly: 0
 --- !u!135 &135547052959553192
 SphereCollider:
   m_ObjectHideFlags: 1

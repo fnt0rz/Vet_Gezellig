@@ -21,7 +21,7 @@ public class PlayerFire : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (CrossPlatformInputManager.GetButtonDown("Fire2") && GetComponent<PlayerMovement>().isGrounded && fireEnabled)
+		if (CrossPlatformInputManager.GetButtonDown("Fire2") && GetComponent<PlayerMovement>().isGrounded && fireEnabled) //TODO: Add cooldown
         {
             animator.SetTrigger("isFiring");
 		}
@@ -32,7 +32,6 @@ public class PlayerFire : MonoBehaviour {
     {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
-		projectile.tag = "Projectile";
 		projectileBody.AddForce(transform.forward * forwardForce);
         Destroy(projectile, 1f);
     }
