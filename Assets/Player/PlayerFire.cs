@@ -28,10 +28,11 @@ public class PlayerFire : MonoBehaviour {
 
     }
 
-    private void FireCurrentWeapon()
+    private void FireCurrentWeapon() //TODO: Fire upwards? 
     {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
+		projectile.tag = "Projectile";
 		projectileBody.AddForce(transform.forward * forwardForce);
         Destroy(projectile, 1f);
     }

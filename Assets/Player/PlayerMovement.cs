@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void flipPlayer()
     {
-        if (translation > 0 && !facingRight || translation < 0 && facingRight) //TODO: FIX rotation
+        if (translation > 0 && !facingRight || translation < 0 && facingRight)
         {
             switch (facingRight)
             {

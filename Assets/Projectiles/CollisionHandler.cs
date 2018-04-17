@@ -19,7 +19,7 @@ public class CollisionHandler : MonoBehaviour {
 			Destroy(vfx, 0.5f);
 			enemyHit(hit,3f);
 		}
-		else if(other.gameObject.tag != "Player")
+		else if(other.gameObject.tag != "Player" && other.gameObject.tag != "Projectile")
 		{
 			var vfx = Instantiate(explosion,transform.position,Quaternion.identity);
 			Destroy(gameObject);

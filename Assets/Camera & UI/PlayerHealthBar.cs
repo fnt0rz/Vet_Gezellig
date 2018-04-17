@@ -20,7 +20,7 @@ public class PlayerHealthBar : MonoBehaviour {
 
     private void SetLives()
     {
-        var livesUI = FindObjectOfType<Text>();
+        var livesUI = GetComponentInChildren<Text>();
         livesUI.text = "LIVES: " + player.currentLives.ToString();
 
     }
