@@ -73,7 +73,6 @@ public class PlayerStats : MonoBehaviour {
     {
 		// play deathanimation --> Animator
 		playerIsAlive = false;
-
 		playerDeath(playerLives);
 		playerLives--;	
 

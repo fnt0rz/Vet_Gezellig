@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
     public float translation;
     bool facingRight;
     public bool moveEnabled = true;
+    PlayerStats playerStats;
 
 
     private void Awake() {
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     facingRight = true;
     animator = GetComponent<Animator>();
 	playerBody = GetComponent<Rigidbody>();
+    playerStats = FindObjectOfType<PlayerStats>();
 	
 	}
 	void OnCollisionEnter(Collision playerCollider) { //FIXME: Needs to be fixed with head
@@ -37,7 +39,20 @@ public class PlayerMovement : MonoBehaviour {
 	private void Update()
     {
         PlayerJump();  
-        RunningAnimation();      
+        RunningAnimation();  
+        moveChecker();    
+    }
+
+    private void moveChecker()
+    {
+        if (playerStats.isAlive)
+        {
+            moveEnabled = true;
+        }
+        else
+        {
+            moveEnabled = false;
+        }
     }
 
     void FixedUpdate() 

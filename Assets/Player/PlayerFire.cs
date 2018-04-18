@@ -8,25 +8,44 @@ public class PlayerFire : MonoBehaviour {
 	[SerializeField] GameObject weaponFire;
 	[SerializeField] int forwardForce = 50;
 	[SerializeField] Transform fireLocation;
+	[SerializeField] float fireRate = 3f;
+	[SerializeField] float nextFire = 0f;
 	Animator animator;
 	PlayerMovement playerMovement;
+	PlayerStats playerStats;
 	public bool fireEnabled = true;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
-	
+		playerStats = FindObjectOfType<PlayerStats>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (CrossPlatformInputManager.GetButtonDown("Fire2") && GetComponent<PlayerMovement>().isGrounded && fireEnabled) //TODO: Add cooldown
-        {
-            animator.SetTrigger("isFiring");
-		}
-
+		AllowedToFire();
     }
+
+    private void AllowedToFire()
+    {
+        if (CrossPlatformInputManager.GetButtonDown("Fire2") && GetComponent<PlayerMovement>().isGrounded && fireEnabled && playerStats.isAlive)
+            FireRateHandeler();
+    }
+
+    private void FireRateHandeler()
+    {	
+		if (Time.time > nextFire)
+		{
+			animator.SetTrigger("isFiring");
+			nextFire = Time.time + fireRate;
+		}
+    }
+
+	public float fireCooldown{
+		get {
+			return nextFire;
+		}
+	}
 
     private void FireCurrentWeapon() //TODO: Fire upwards? 
     {
