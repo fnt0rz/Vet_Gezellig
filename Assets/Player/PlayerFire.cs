@@ -11,6 +11,7 @@ public class PlayerFire : MonoBehaviour {
 	[SerializeField] float fireRate = 3f;
 	[SerializeField] float nextFire = 0f;
 	[SerializeField] float attackRange = 10f;
+	[SerializeField] float fire2Damage = 3f;
 	Animator animator;
 	PlayerMovement playerMovement;
 	PlayerStats playerStats;
@@ -24,10 +25,10 @@ public class PlayerFire : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		AllowedToFire();
+		FireController();
     }
 
-    private void AllowedToFire()
+    private void FireController()
     {
         if (CrossPlatformInputManager.GetButtonDown("Fire2") && GetComponent<PlayerMovement>().isGrounded && fireEnabled && playerStats.isAlive)
             FireRateHandeler();
@@ -62,5 +63,6 @@ public class PlayerFire : MonoBehaviour {
         projectile.GetComponent<CollisionHandler>().isEnemy = false;
         projectile.GetComponent<CollisionHandler>().firedFrom = transform.position;
         projectile.GetComponent<CollisionHandler>().maxRange = attackRange;
+		projectile.GetComponent<CollisionHandler>().hitDamage = fire2Damage;
     }
 }

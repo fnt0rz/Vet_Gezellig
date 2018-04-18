@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour {
     private void GotKilled()
     {
 		// kill effect
-        print("Got Killed");
 		collisionHandler.enemyHit -= HitHandler;
 		Destroy(gameObject);
     }
@@ -36,13 +35,11 @@ public class Enemy : MonoBehaviour {
     private void GotHit(float damage)
     {
 		//hit effect
-		print("Got Hit!");
         enemyHealth -= damage;
     }
 
     // Update is called once per frame
     void Update () {
-	
 		collisionHandler = FindObjectOfType<CollisionHandler>();
 		if (collisionHandler != null && !subscribed && !collisionHandler.isEnemy)
 		{	
@@ -53,6 +50,5 @@ public class Enemy : MonoBehaviour {
 		{
 			subscribed = false;
 		}
-
 	}
 }

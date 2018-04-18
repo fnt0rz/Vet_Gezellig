@@ -12,6 +12,7 @@ public class CollisionHandler : MonoBehaviour {
 	public bool isEnemy;
 	public Vector3 firedFrom;
 	public float maxRange;
+	public float hitDamage;
 	PlayerStats playerStats;
 
 	private void Start() {
@@ -54,8 +55,6 @@ public class CollisionHandler : MonoBehaviour {
 			Destroy(gameObject);
 			Destroy(vfx, 0.5f);
 		}
-
-	
     }
 
     private void PlayerHit(Collider other)
@@ -65,7 +64,6 @@ public class CollisionHandler : MonoBehaviour {
 		playerStats.PlayerHit(1f);
         Destroy(gameObject);
         Destroy(vfx, 0.5f);
-
 		}
     }
 
@@ -77,7 +75,7 @@ public class CollisionHandler : MonoBehaviour {
 			var vfx = Instantiate(explosion, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 			Destroy(vfx, 0.5f);
-			enemyHit(hit, 3f);
+			enemyHit(hit, hitDamage);
 		}
     }
 }
