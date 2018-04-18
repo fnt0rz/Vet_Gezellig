@@ -10,15 +10,27 @@ public class CollisionHandler : MonoBehaviour {
 	public delegate void ObjectHit(GameObject hit, float damage);
 	public event ObjectHit enemyHit;
 	public bool isEnemy;
-
+	public Vector3 firedFrom;
+	public float maxRange;
 	PlayerStats playerStats;
 
 	private void Start() {
 		playerStats = FindObjectOfType<PlayerStats>();
 	}
 
+	private void Update() {
+		DistanceController();
+	}
 
-	private void OnTriggerEnter(Collider other) {
+    private void DistanceController()
+    {
+        if (Vector3.Distance(firedFrom,transform.position)> maxRange)
+		{
+			Destroy(gameObject);
+		}
+    }
+
+    private void OnTriggerEnter(Collider other) {
 		switch (other.gameObject.tag)
         {
 			case "Enemy":

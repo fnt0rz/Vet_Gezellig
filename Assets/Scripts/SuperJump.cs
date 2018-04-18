@@ -12,7 +12,7 @@ public class SuperJump : MonoBehaviour {
 		playerMovement = FindObjectOfType<PlayerMovement>();
 	}
 
-	private void OnCollisionEnter(Collision other) {
+	private void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Player")
 		{
 			currentJumpPower = playerMovement.jumpPower;
@@ -20,7 +20,7 @@ public class SuperJump : MonoBehaviour {
 		}
 	}
 
-	private void OnCollisionExit(Collision other) {
+	private void OnTriggerExit(Collider other) {
 		if (other.gameObject.tag == "Player")
 		{
 			playerMovement.jumpPower = currentJumpPower;

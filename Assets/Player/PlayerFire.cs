@@ -10,6 +10,7 @@ public class PlayerFire : MonoBehaviour {
 	[SerializeField] Transform fireLocation;
 	[SerializeField] float fireRate = 3f;
 	[SerializeField] float nextFire = 0f;
+	[SerializeField] float attackRange = 10f;
 	Animator animator;
 	PlayerMovement playerMovement;
 	PlayerStats playerStats;
@@ -51,7 +52,15 @@ public class PlayerFire : MonoBehaviour {
     {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
+		SetProjectileStats(projectile);
 		projectileBody.AddForce(transform.forward * forwardForce);
-        Destroy(projectile, 1f);
+
+    }
+
+	    private void SetProjectileStats(GameObject projectile)
+    {
+        projectile.GetComponent<CollisionHandler>().isEnemy = false;
+        projectile.GetComponent<CollisionHandler>().firedFrom = transform.position;
+        projectile.GetComponent<CollisionHandler>().maxRange = attackRange;
     }
 }

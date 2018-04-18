@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class EnemyFire : MonoBehaviour {
 
-	[SerializeField] float attackRadius = 10f;
+	[SerializeField] float attackRange = 10f;
 	[SerializeField] GameObject projectileToFire;
 	[SerializeField] float forwardForce = 50f;
 	[SerializeField] float fireRate = 0.5f;
 	[SerializeField] float nextFire = 0f;
 	[SerializeField] GameObject aimFor;
-    [SerializeField] float destroyTime = 1.5f;
 	GameObject player;
 	PlayerStats playerStats;
 
@@ -22,12 +21,13 @@ public class EnemyFire : MonoBehaviour {
 	}
 
 	private void Update() {
-		FireChecker();
+		FireController();
 	}
 
-    private void FireChecker()
+
+    private void FireController()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= attackRadius && playerStats.isAlive)
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackRange && playerStats.isAlive)
 		{
 			fireRateHandler();
 			
@@ -48,12 +48,20 @@ public class EnemyFire : MonoBehaviour {
         transform.LookAt(aimFor.transform);
         var projectile = Instantiate(projectileToFire, transform.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
-        projectile.GetComponent<CollisionHandler>().isEnemy = true;
+        SetProjectileStats(projectile);
         projectileBody.AddForce(transform.forward * forwardForce);
-        Destroy(projectile, destroyTime);
+
+
+    }
+
+    private void SetProjectileStats(GameObject projectile)
+    {
+        projectile.GetComponent<CollisionHandler>().isEnemy = true;
+        projectile.GetComponent<CollisionHandler>().firedFrom = transform.position;
+        projectile.GetComponent<CollisionHandler>().maxRange = attackRange;
     }
 
     private void OnDrawGizmos() {
-		Gizmos.DrawWireSphere(transform.position, attackRadius);
+		Gizmos.DrawWireSphere(transform.position, attackRange);
 	}
 }
