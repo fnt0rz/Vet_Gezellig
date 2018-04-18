@@ -9,23 +9,35 @@ public class PlayerStats : MonoBehaviour {
 	[SerializeField] float maxHealthPoints = 3f;
 	[SerializeField] float playerLives = 1f;
 	float currentHealthPoints = 3f;
-	public bool playerIsAlive = true;
+	bool playerIsAlive = true;
 
 	public delegate void PlayerDeath(float remainingLives);
 	public event PlayerDeath playerDeath;
 
+	public bool isAlive {
+		get {
+			return playerIsAlive;
+		}
+	}
 	public float currentLives 
 	{
 		get {
 			return playerLives;
 			}
 	}
-
 	public float healthAsPercentage
 	{
 		get {
 			return currentHealthPoints / (float)maxHealthPoints;
 		}
+	}
+
+	public float GetCurrentHealthPoints
+	{
+		get {
+			return currentHealthPoints;
+		 }
+
 	}
 
 	private void Awake() {
@@ -43,6 +55,7 @@ public class PlayerStats : MonoBehaviour {
 	public void PlayerHit(float damage){
 		if (currentHealthPoints <= damage)
 		{
+			currentHealthPoints -= damage;
 			KillPlayer();
 		}
 		else
@@ -51,14 +64,19 @@ public class PlayerStats : MonoBehaviour {
 		}
 	}
 
+	public void Respawn() {
+		currentHealthPoints = maxHealthPoints;
+		playerIsAlive = true;
+	}
 
     private void KillPlayer()
     {
 		// play deathanimation --> Animator
 		playerIsAlive = false;
+
 		playerDeath(playerLives);
 		playerLives--;	
-		currentHealthPoints = maxHealthPoints;
+
     }
 
 }

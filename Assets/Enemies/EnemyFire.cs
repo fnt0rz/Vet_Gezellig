@@ -27,7 +27,7 @@ public class EnemyFire : MonoBehaviour {
 
     private void FireChecker()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= attackRadius && playerStats.playerIsAlive)
+        if (Vector3.Distance(player.transform.position, transform.position) <= attackRadius && playerStats.isAlive)
 		{
 			fireRateHandler();
 			

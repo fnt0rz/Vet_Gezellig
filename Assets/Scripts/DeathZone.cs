@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeathZone : MonoBehaviour {
-	PlayerStats	player;
+	PlayerStats	playerStats;
 
 	private void Start() {
-		player = FindObjectOfType<PlayerStats>();
+		playerStats = FindObjectOfType<PlayerStats>();
 	}
 
 
@@ -14,7 +14,7 @@ public class DeathZone : MonoBehaviour {
 	private void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Player")
 		{
-			player.PlayerHit(3f);
+			playerStats.PlayerHit(playerStats.GetCurrentHealthPoints);
 		}
 	}
 }

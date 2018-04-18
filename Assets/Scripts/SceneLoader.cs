@@ -11,7 +11,7 @@ public class SceneLoader : MonoBehaviour {
 
 	private void Start() {
 		playerStats = FindObjectOfType<PlayerStats>();
-		playerStats.playerIsAlive = true;
+		playerStats.Respawn();
 		playerStats.playerDeath += RespawnHandler;
 	}
 
