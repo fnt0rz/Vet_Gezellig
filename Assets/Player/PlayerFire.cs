@@ -20,7 +20,7 @@ public class PlayerFire : MonoBehaviour {
 	// Use this for initialization
 
 	//TODO: Move animations to animatorscript
-	void Start () {
+	public void InitialLoad () {
 		animator = GetComponentInChildren<Animator>();
 		playerStats = FindObjectOfType<PlayerStats>();
 	}

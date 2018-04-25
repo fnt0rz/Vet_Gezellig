@@ -20864,7 +20864,7 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 1.3006643
-    functionName: FireCurrentWeapon
+    functionName: TriggerFire
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -7,23 +7,16 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerSwitcher : MonoBehaviour {
 
 	[SerializeField] GameObject currentCharacter;
-	[SerializeField] GameObject newCharacter;
-	GameObject oldChar;
 	CameraFollow cameraFollow;
 	PlayerMovement playerMovement;
 	PlayerFire playerFire;
-
+	PlayerStats playerStats;
+	private GameObject[] characterList;
+	
 	private void Awake() {
-		int StatsCount = FindObjectsOfType<PlayerSwitcher>().Length;
-		if (StatsCount > 1)
-		{
-			Destroy(gameObject);
-		}
-		else {
-			DontDestroyOnLoad(gameObject);
-		}
-
-     	currentCharacter.tag = "Player";   
+		playerStats = FindObjectOfType<PlayerStats>();
+		characterList = GameObject.FindGameObjectsWithTag("Character");
+		CharacterSelection();
 	}
 
 	private void Update() {
@@ -36,31 +29,46 @@ public class PlayerSwitcher : MonoBehaviour {
 		playerFire = FindObjectOfType<PlayerFire>();
 	}
 
+	public GameObject getCharacter {
+		get {
+			return currentCharacter;
+		}
+	}
+
+    private void CharacterSelection()
+    {
+		foreach (GameObject gameObject in characterList)
+		{
+			gameObject.SetActive(false);
+		}
+
+		if (currentCharacter == null)
+		{
+			currentCharacter = characterList[playerStats.characterIndex];
+		}
+	}
+
     private void Switchplayer()
     {
         if (CrossPlatformInputManager.GetButtonDown("Fire3") && playerMovement.isGrounded && playerMovement.moveEnabled)
 		{
-			disableCurrent();
-			enableNew();
+			//animation
+			ChangeCharacter();
 			cameraFollow.RefreshTarget();
 			playerMovement.RefreshAnimator();
 			playerFire.RefreshAnimator();
 		}
     }
 
-    private void enableNew()
+    private void ChangeCharacter()
     {
-        newCharacter.transform.position = oldChar.transform.position;
-		newCharacter.SetActive(true);
-		currentCharacter = newCharacter;
-		newCharacter = oldChar;
-		currentCharacter.tag = "Player";
-    }
-
-    private void disableCurrent()
-    {
-        oldChar = currentCharacter;
-		currentCharacter.SetActive(false);	
-		currentCharacter.tag ="Untagged";
+		currentCharacter.SetActive(false);
+		playerStats.characterIndex++;
+		if (playerStats.characterIndex == characterList.Length)
+		{
+			playerStats.characterIndex = 0;
+		}
+		currentCharacter = characterList[playerStats.characterIndex];
+		currentCharacter.SetActive(true);
     }
 }

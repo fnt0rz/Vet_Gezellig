@@ -25,12 +25,12 @@ public class PlayerMovement : MonoBehaviour {
 
     //TODO: Move animator different script! 
 
-	private void Start() {
+	public void InitialLoad(){
     facingRight = true;
     animator = GetComponentInChildren<Animator>();
 	playerBody = GetComponent<Rigidbody>();
     playerStats = FindObjectOfType<PlayerStats>();
-	
+
 	}
 	void OnCollisionEnter(Collision playerCollider) { //FIXME: Needs to be fixed with head
 		if (!isGrounded)
