@@ -17,8 +17,8 @@ public class EnemyFire : MonoBehaviour {
     private void Start() {
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerStats = FindObjectOfType<PlayerStats>();
-	
-	}
+        aimFor = GameObject.Find("Player/AimPoint");
+    }
 
 	private void Update() {
 		FireController();
@@ -44,14 +44,11 @@ public class EnemyFire : MonoBehaviour {
 
     private void fireProjectile()
     {
-
         transform.LookAt(aimFor.transform);
         var projectile = Instantiate(projectileToFire, transform.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
         SetProjectileStats(projectile);
         projectileBody.AddForce(transform.forward * forwardForce);
-
-
     }
 
     private void SetProjectileStats(GameObject projectile)

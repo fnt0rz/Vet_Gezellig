@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraFollow : MonoBehaviour {
+public class CameraFollow : MonoBehaviour {
 
 	GameObject player;
 
@@ -15,5 +15,9 @@ public class cameraFollow : MonoBehaviour {
 	private void LateUpdate() {
 	
 	transform.position = player.transform.position;		
+	}
+
+	public void RefreshTarget() {
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 }

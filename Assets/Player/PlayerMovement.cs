@@ -15,15 +15,19 @@ public class PlayerMovement : MonoBehaviour {
     bool facingRight;
     public bool moveEnabled = true;
     PlayerStats playerStats;
+    [SerializeField] int maxJumpes = 1;
+    int remainingJumps;
 
 
     private void Awake() {
      	gameObject.tag = "Player";   
     }
 
+    //TODO: Move animator different script! 
+
 	private void Start() {
     facingRight = true;
-    animator = GetComponent<Animator>();
+    animator = GetComponentInChildren<Animator>();
 	playerBody = GetComponent<Rigidbody>();
     playerStats = FindObjectOfType<PlayerStats>();
 	
@@ -32,8 +36,13 @@ public class PlayerMovement : MonoBehaviour {
 		if (!isGrounded)
 		{
 			isGrounded = true;
+            remainingJumps = maxJumpes;
+            if (animator.gameObject.activeSelf)
+            {
             animator.ResetTrigger("isJumping");
             animator.SetBool("isLanding", false);
+		}
+
 		}
 	}
 	private void Update()
@@ -41,6 +50,11 @@ public class PlayerMovement : MonoBehaviour {
         PlayerJump();  
         RunningAnimation();  
         moveChecker();    
+    }
+
+    public void RefreshAnimator()
+    {
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void moveChecker()
@@ -97,6 +111,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void RunningAnimation()
     {
+        
+        if (animator.gameObject.activeSelf) {
         if (translation != 0)
         {
             animator.SetBool("isRunning", true);
@@ -106,13 +122,16 @@ public class PlayerMovement : MonoBehaviour {
             animator.SetBool("isRunning", false);
         }
     }
+    }
 
     private void MovementHandeler()
     {
         if (playerBody.velocity.y < -1)
         {   
             isGrounded = false;
+            if (animator.gameObject.activeSelf) {
             animator.SetBool("isLanding", true);
+        }
         }
 
         playerBody.velocity = new Vector3(translation,playerBody.velocity.y,playerBody.velocity.z);
@@ -123,7 +142,20 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (CrossPlatformInputManager.GetButtonDown("Jump") && isGrounded && moveEnabled)
         {   
+            remainingJumps --;
+            if (animator.gameObject.activeSelf) {
             animator.SetTrigger("isJumping");
+            }
+            playerBody.velocity = new Vector3(playerBody.velocity.x,jumpPower,playerBody.velocity.z);
+			isGrounded = false;
+        }
+
+        else if (CrossPlatformInputManager.GetButtonDown("Jump") && remainingJumps >= 1 && moveEnabled && !isGrounded)
+        {
+            remainingJumps = 0;
+            if (animator.gameObject.activeSelf) {
+            animator.SetTrigger("isJumping");
+            }
             playerBody.velocity = new Vector3(playerBody.velocity.x,jumpPower,playerBody.velocity.z);
 			isGrounded = false;
         }
@@ -131,6 +163,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void LayerHandler() 
     {
+        if (animator.gameObject.activeSelf) {
         if (!isGrounded)
         {
             animator.SetLayerWeight(1,1);
@@ -140,4 +173,5 @@ public class PlayerMovement : MonoBehaviour {
             animator.SetLayerWeight(1,0);
         }
     }
+}
 }

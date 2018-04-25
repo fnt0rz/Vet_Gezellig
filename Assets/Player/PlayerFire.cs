@@ -18,11 +18,18 @@ public class PlayerFire : MonoBehaviour {
 	public bool fireEnabled = true;
 
 	// Use this for initialization
+
+	//TODO: Move animations to animatorscript
 	void Start () {
-		animator = GetComponent<Animator>();
+		animator = GetComponentInChildren<Animator>();
 		playerStats = FindObjectOfType<PlayerStats>();
 	}
 	
+
+	public void RefreshAnimator() {
+		animator = GetComponentInChildren<Animator>();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		FireController();
@@ -38,8 +45,11 @@ public class PlayerFire : MonoBehaviour {
     {	
 		if (Time.time > nextFire)
 		{
-			animator.SetTrigger("isFiring");
-			nextFire = Time.time + fireRate;
+			if (animator.gameObject.activeSelf)
+            {
+				animator.SetTrigger("isFiring");
+				nextFire = Time.time + fireRate;
+			}
 		}
     }
 
@@ -49,7 +59,7 @@ public class PlayerFire : MonoBehaviour {
 		}
 	}
 
-    private void FireCurrentWeapon() //TODO: Fire upwards? 
+    public void FireCurrentWeapon() //TODO: Fire upwards? 
     {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
