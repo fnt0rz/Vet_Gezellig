@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBall : MonoBehaviour {
+public class KamikazePigeon : MonoBehaviour {
 
 	[SerializeField] GameObject weaponFire;
 	[SerializeField] Transform fireLocation;
@@ -13,7 +13,7 @@ public class FireBall : MonoBehaviour {
 	[SerializeField] int forwardForce = 400;
 	Animator animator;
 	PlayerSwitcher playerSwitcher;
-
+	
 	public void Start() {
 		animator = GetComponentInChildren<Animator>();
 		playerSwitcher = FindObjectOfType<PlayerSwitcher>();
@@ -25,13 +25,13 @@ public class FireBall : MonoBehaviour {
 		animator = GetComponentInChildren<Animator>();
 	}
 
-	public void FireFireball()
+		public void FirePigeon()
     {	
 		if (Time.time > nextFire)
 		{
 			if (animator.gameObject.activeSelf)
             {
-				animator.SetTrigger("fireFireball");
+				animator.SetTrigger("firePigeon");
 				nextFire = Time.time + fireRate;
 			}
 		}
@@ -48,7 +48,7 @@ public class FireBall : MonoBehaviour {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
 		SetProjectileStats(projectile);
-		projectileBody.AddForce(transform.forward * forwardForce);
+		projectileBody.AddForce(transform.up * forwardForce);
 
     }
 
@@ -59,5 +59,4 @@ public class FireBall : MonoBehaviour {
         projectile.GetComponent<CollisionHandler>().maxRange = attackRange;
 		projectile.GetComponent<CollisionHandler>().hitDamage = fire2Damage;
     }
-
 }

@@ -7,6 +7,7 @@ public class PlayerFire: MonoBehaviour {
 	
 	PlayerStats playerStats;
 	FireBall fireBall;
+	KamikazePigeon kamikazePigeon;
 	public bool fireEnabled = true;
 
 
@@ -14,6 +15,7 @@ public class PlayerFire: MonoBehaviour {
 	public void Start () {
 		playerStats = FindObjectOfType<PlayerStats>();
 		fireBall = FindObjectOfType<FireBall>();
+		kamikazePigeon = FindObjectOfType<KamikazePigeon>();
 	}
 	
 	void Update () {
@@ -27,6 +29,9 @@ public class PlayerFire: MonoBehaviour {
 			{
 				case 0:
 				fireBall.FireFireball();
+				break;
+				case 1:
+				kamikazePigeon.FirePigeon();
 				break;
 				default:
 				Debug.LogError("Suppose to fire but no character?");

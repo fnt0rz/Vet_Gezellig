@@ -9,7 +9,6 @@ public class PlayerSwitcher : MonoBehaviour {
 	[SerializeField] GameObject currentCharacter;
 	CameraFollow cameraFollow;
 	PlayerMovement playerMovement;
-	FireBall playerFire;
 	PlayerStats playerStats;
 	public GameObject[] characterList;
 
@@ -29,7 +28,6 @@ public class PlayerSwitcher : MonoBehaviour {
 	private void Start() {
 		cameraFollow = FindObjectOfType<CameraFollow>();
 		playerMovement = FindObjectOfType<PlayerMovement>();
-		playerFire = FindObjectOfType<FireBall>();
 	}
 
 	public GameObject getCharacter {

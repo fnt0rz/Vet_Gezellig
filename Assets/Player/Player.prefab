@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114736496376144924}
   - component: {fileID: 54204695604198004}
   - component: {fileID: 65702615506271552}
+  - component: {fileID: 114997446543157018}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -291,7 +292,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponFire: {fileID: 1439559344910710, guid: 820adfa1cb0ebc64eb97c7ae7fbc07a1, type: 2}
-  fireLocation: {fileID: 4955155611040904}
+  fireLocation: {fileID: 0}
+  fireRate: 3
+  nextFire: 0
+  attackRange: 10
+  fire2Damage: 3
+  forwardForce: 400
+--- !u!114 &114997446543157018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1737428731686780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659e9b14dfc152b478a213c22debb0b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponFire: {fileID: 1439559344910710, guid: 190aca4de4b66ad4a8e96b8dca226f59, type: 2}
+  fireLocation: {fileID: 0}
   fireRate: 3
   nextFire: 0
   attackRange: 10

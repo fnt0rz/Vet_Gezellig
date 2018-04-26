@@ -138,7 +138,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1439559344910710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.074, y: 1.151, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4257069852113182}
@@ -256,7 +256,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 1762959494425262, guid: c255e72e1b4c15a41b602e826d0b7afa, type: 2}
   isEnemy: 0
-  isAlly: 0
+  firedFrom: {x: 0, y: 0, z: 0}
+  maxRange: 0
+  hitDamage: 0
 --- !u!135 &135547052959553192
 SphereCollider:
   m_ObjectHideFlags: 1
