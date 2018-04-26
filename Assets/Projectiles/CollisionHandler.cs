@@ -40,6 +40,8 @@ public class CollisionHandler : MonoBehaviour {
         	case "Player":
             	PlayerHit(other);
 				break;
+			case "LevelTrigger":
+				break;
 			default:
 				EnvoirementHit(other);
 				break;
