@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 4548718435864852}
   - component: {fileID: 114203202773541834}
   - component: {fileID: 114189986667188838}
+  - component: {fileID: 114736496376144924}
   - component: {fileID: 54204695604198004}
   - component: {fileID: 65702615506271552}
   m_Layer: 0
@@ -248,13 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f360715c69a4f41a9bf144d4cc31db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponFire: {fileID: 1439559344910710, guid: 820adfa1cb0ebc64eb97c7ae7fbc07a1, type: 2}
-  forwardForce: 500
-  fireLocation: {fileID: 4955155611040904}
-  fireRate: 3
-  nextFire: 0
-  attackRange: 10
-  fire2Damage: 3
   fireEnabled: 1
 --- !u!114 &114203202773541834
 MonoBehaviour:
@@ -285,6 +279,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64f88c694d4063c48b004aea9e6dc1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114736496376144924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1737428731686780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a92d31ecdc69594285378bfb8277fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponFire: {fileID: 1439559344910710, guid: 820adfa1cb0ebc64eb97c7ae7fbc07a1, type: 2}
+  fireLocation: {fileID: 4955155611040904}
+  fireRate: 3
+  nextFire: 0
+  attackRange: 10
+  fire2Damage: 3
+  forwardForce: 400
 --- !u!137 &137459136853953804
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

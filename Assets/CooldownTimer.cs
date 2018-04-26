@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CooldownTimer : MonoBehaviour {
-	PlayerFire playerFire;
+	FireBall fireBall;
 	Text coolDownUi;
 
 	private void Start() {
-		playerFire = FindObjectOfType<PlayerFire>();
+		fireBall = FindObjectOfType<FireBall>();
 		coolDownUi = GetComponent<Text>();
 	}
 	void Update () {
-		var rawCooldown = playerFire.fireCooldown - Time.time;
+		var rawCooldown = fireBall.fireCooldown - Time.time;
 		double coolDown = System.Math.Round(rawCooldown,1);
 		if (coolDown > Mathf.Epsilon)
 		{

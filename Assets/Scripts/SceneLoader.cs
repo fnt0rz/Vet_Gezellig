@@ -10,13 +10,13 @@ public class SceneLoader : MonoBehaviour {
 	ScreenFade screenFade;
 	PlayerSwitcher playerSwitcher;
 	PlayerMovement playerMovement;
-	PlayerFire playerFire;
+	FireBall playerFire;
 
 	private void Start() {
 		playerStats = FindObjectOfType<PlayerStats>();
 		playerSwitcher = FindObjectOfType<PlayerSwitcher>();
 		playerMovement = FindObjectOfType<PlayerMovement>();
-		playerFire = FindObjectOfType<PlayerFire>();
+		playerFire = FindObjectOfType<FireBall>();
 		playerStats.Respawn();
 		playerStats.playerDeath += RespawnHandler;
 		LoadPlayer();
@@ -32,8 +32,7 @@ public class SceneLoader : MonoBehaviour {
 			playerMovement.remainingJumps = 2;
 		}
 		characterToLoad.SetActive(true);
-		playerMovement.InitialLoad();
-		playerFire.InitialLoad();
+		playerSwitcher.FirstLoad();
     }
 
     private void RespawnHandler(float lives) {

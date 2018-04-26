@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class FireTrigger : MonoBehaviour {
 
-	PlayerFire playerFire;
+	FireBall fireBall;
 
 	// Use this for initialization
 	void Start () {
-		playerFire = FindObjectOfType<PlayerFire>();
+		fireBall = FindObjectOfType<FireBall>();
 	}
 	
 	private void TriggerFire(){
-		playerFire.FireCurrentWeapon();
+		fireBall.FireCurrentWeapon();
 	}
 
 }

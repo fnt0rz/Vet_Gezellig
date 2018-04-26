@@ -9,7 +9,7 @@ public class PlayerSwitcher : MonoBehaviour {
 	[SerializeField] GameObject currentCharacter;
 	CameraFollow cameraFollow;
 	PlayerMovement playerMovement;
-	PlayerFire playerFire;
+	FireBall playerFire;
 	PlayerStats playerStats;
 	public GameObject[] characterList;
 
@@ -29,13 +29,18 @@ public class PlayerSwitcher : MonoBehaviour {
 	private void Start() {
 		cameraFollow = FindObjectOfType<CameraFollow>();
 		playerMovement = FindObjectOfType<PlayerMovement>();
-		playerFire = FindObjectOfType<PlayerFire>();
+		playerFire = FindObjectOfType<FireBall>();
 	}
 
 	public GameObject getCharacter {
 		get {
 			return currentCharacter;
 		}
+	}
+
+	public void FirstLoad () 
+	{
+		playerSwitch();
 	}
 
     private void CharacterSelection()
@@ -59,8 +64,6 @@ public class PlayerSwitcher : MonoBehaviour {
 			ChangeCharacter();
 			playerSwitch();
 			cameraFollow.RefreshTarget();
-			playerMovement.RefreshAnimator();
-			playerFire.RefreshAnimator();
 		}
     }
 

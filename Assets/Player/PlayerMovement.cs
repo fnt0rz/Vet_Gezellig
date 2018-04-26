@@ -32,17 +32,13 @@ public class PlayerMovement : MonoBehaviour {
     private void Start() {
         playerSwitcher = FindObjectOfType<PlayerSwitcher>();
         playerSwitcher.playerSwitch += ChangeStats;
-    }
-
-
-
-	public void InitialLoad()
-    {
+        playerSwitcher.playerSwitch += RefreshAnimator;
         facingRight = true;
         animator = GetComponentInChildren<Animator>();
         playerBody = GetComponent<Rigidbody>();
         playerStats = FindObjectOfType<PlayerStats>();
-	}
+    }
+
 	void OnCollisionEnter(Collision playerCollider) 
     { //FIXME: Needs to be fixed with head
 		if (!isGrounded)
