@@ -11,8 +11,11 @@ public class PlayerSwitcher : MonoBehaviour {
 	PlayerMovement playerMovement;
 	PlayerFire playerFire;
 	PlayerStats playerStats;
-	private GameObject[] characterList;
-	
+	public GameObject[] characterList;
+
+	public delegate void PlayerSwitch();
+	public event PlayerSwitch playerSwitch;
+
 	private void Awake() {
 		playerStats = FindObjectOfType<PlayerStats>();
 		characterList = GameObject.FindGameObjectsWithTag("Character");
@@ -44,7 +47,7 @@ public class PlayerSwitcher : MonoBehaviour {
 
 		if (currentCharacter == null)
 		{
-			currentCharacter = characterList[playerStats.characterIndex];
+			currentCharacter = characterList[playerStats.getCharIndex];
 		}
 	}
 
@@ -54,6 +57,7 @@ public class PlayerSwitcher : MonoBehaviour {
 		{
 			//animation
 			ChangeCharacter();
+			playerSwitch();
 			cameraFollow.RefreshTarget();
 			playerMovement.RefreshAnimator();
 			playerFire.RefreshAnimator();
@@ -63,12 +67,8 @@ public class PlayerSwitcher : MonoBehaviour {
     private void ChangeCharacter()
     {
 		currentCharacter.SetActive(false);
-		playerStats.characterIndex++;
-		if (playerStats.characterIndex == characterList.Length)
-		{
-			playerStats.characterIndex = 0;
-		}
-		currentCharacter = characterList[playerStats.characterIndex];
+		playerStats.ChangeCharacterIndex(characterList.Length);
+		currentCharacter = characterList[playerStats.getCharIndex];
 		currentCharacter.SetActive(true);
     }
 }

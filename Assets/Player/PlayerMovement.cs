@@ -6,33 +6,45 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : MonoBehaviour {
 
+ //TODO: Move animator different script! 
+
+    [SerializeField] float floatTime = 10f;
     public bool isGrounded;
     public float speed = 10.0F;
-    public float jumpPower = 12f;
+    public float jumpPower = 14f;
+    float doubleJumpPower = 10f;
     Rigidbody playerBody;
     static Animator animator;
-    public float translation;
+    float translation;
     bool facingRight;
     public bool moveEnabled = true;
     PlayerStats playerStats;
-    [SerializeField] int maxJumpes = 1;
-    int remainingJumps;
+    public int maxJumpes = 1;
+    public int remainingJumps;
+    PlayerSwitcher playerSwitcher;
+    
 
 
     private void Awake() {
      	gameObject.tag = "Player";   
     }
 
-    //TODO: Move animator different script! 
+    private void Start() {
+        playerSwitcher = FindObjectOfType<PlayerSwitcher>();
+        playerSwitcher.playerSwitch += ChangeStats;
+    }
 
-	public void InitialLoad(){
-    facingRight = true;
-    animator = GetComponentInChildren<Animator>();
-	playerBody = GetComponent<Rigidbody>();
-    playerStats = FindObjectOfType<PlayerStats>();
 
+
+	public void InitialLoad()
+    {
+        facingRight = true;
+        animator = GetComponentInChildren<Animator>();
+        playerBody = GetComponent<Rigidbody>();
+        playerStats = FindObjectOfType<PlayerStats>();
 	}
-	void OnCollisionEnter(Collision playerCollider) { //FIXME: Needs to be fixed with head
+	void OnCollisionEnter(Collision playerCollider) 
+    { //FIXME: Needs to be fixed with head
 		if (!isGrounded)
 		{
 			isGrounded = true;
@@ -75,14 +87,22 @@ public class PlayerMovement : MonoBehaviour {
         flipPlayer();
         RunningAnimation();
         LayerHandler();
-        
+        PlayerDrag();
+        ResetDrag();
+    }
+
+    void ResetDrag() {
+        if (isGrounded && playerBody.drag > 0)
+        {
+            playerBody.drag = 0;
+        }
     }
 
     private void InputTranslator()
     {
         if (moveEnabled)
         {
-            translation = Input.GetAxis("Horizontal") * speed;
+            translation = CrossPlatformInputManager.GetAxis("Horizontal") * speed;
             MovementHandeler();
         }
 
@@ -111,31 +131,46 @@ public class PlayerMovement : MonoBehaviour {
 
     private void RunningAnimation()
     {
-        
-        if (animator.gameObject.activeSelf) {
-        if (translation != 0)
+      if (animator.gameObject.activeSelf) 
         {
-            animator.SetBool("isRunning", true);
+            if (translation != 0)
+            {
+                animator.SetBool("isRunning", true);
+            }
+            else
+            {
+                animator.SetBool("isRunning", false);
+            }
         }
-        else
-        {
-            animator.SetBool("isRunning", false);
-        }
-    }
     }
 
     private void MovementHandeler()
     {
-        if (playerBody.velocity.y < -1)
-        {   
+        playerBody.velocity = new Vector3(translation, playerBody.velocity.y, playerBody.velocity.z);
+    }
+
+    //This makes Saske Float
+    private void PlayerDrag()
+    {
+        if (playerBody.velocity.y < -.7f && CrossPlatformInputManager.GetButton("Jump") && playerStats.getCharIndex == 1) // if player is controlling saske and holding jump
+        {
+            //TODO: Float animation
+            playerBody.drag = floatTime; // increasing drag to make player float
             isGrounded = false;
-            if (animator.gameObject.activeSelf) {
-            animator.SetBool("isLanding", true);
+            if (animator.gameObject.activeSelf)
+            {
+                animator.SetBool("isLanding", true);
+            }
         }
+        else if (playerBody.velocity.y < -.7f) // if player is not controlling saske OR is not holding space set the drag back to 0
+        {
+            playerBody.drag = 0;
+            isGrounded = false;
+            if (animator.gameObject.activeSelf)
+            {
+                animator.SetBool("isLanding", true);
+            }
         }
-
-        playerBody.velocity = new Vector3(translation,playerBody.velocity.y,playerBody.velocity.z);
-
     }
 
     private void PlayerJump()
@@ -146,17 +181,18 @@ public class PlayerMovement : MonoBehaviour {
             if (animator.gameObject.activeSelf) {
             animator.SetTrigger("isJumping");
             }
-            playerBody.velocity = new Vector3(playerBody.velocity.x,jumpPower,playerBody.velocity.z);
+            playerBody.velocity = Vector3.up * jumpPower;
 			isGrounded = false;
         }
 
-        else if (CrossPlatformInputManager.GetButtonDown("Jump") && remainingJumps >= 1 && moveEnabled && !isGrounded)
+        else if (CrossPlatformInputManager.GetButtonDown("Jump") && remainingJumps >= 1 && moveEnabled && !isGrounded) // double jump
         {
-            remainingJumps = 0;
+            //TODO: Fart animation
+            remainingJumps --;
             if (animator.gameObject.activeSelf) {
             animator.SetTrigger("isJumping");
             }
-            playerBody.velocity = new Vector3(playerBody.velocity.x,jumpPower,playerBody.velocity.z);
+            playerBody.velocity = Vector3.up * doubleJumpPower;
 			isGrounded = false;
         }
     }
@@ -174,4 +210,20 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 }
+    private void ChangeStats()
+    {
+		switch (playerStats.getCharIndex)
+		{
+			case 0:
+				maxJumpes = 2;
+				remainingJumps =2;
+				break;
+			case 1:
+				maxJumpes = 1;
+				remainingJumps =1;
+				break;
+			default:
+			break;
+		}
+    }
 }

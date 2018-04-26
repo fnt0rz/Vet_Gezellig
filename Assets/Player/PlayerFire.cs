@@ -17,7 +17,6 @@ public class PlayerFire : MonoBehaviour {
 	PlayerStats playerStats;
 	public bool fireEnabled = true;
 
-	// Use this for initialization
 
 	//TODO: Move animations to animatorscript
 	public void InitialLoad () {
@@ -30,7 +29,6 @@ public class PlayerFire : MonoBehaviour {
 		animator = GetComponentInChildren<Animator>();
 	}
 
-	// Update is called once per frame
 	void Update () {
 		FireController();
     }
@@ -59,7 +57,7 @@ public class PlayerFire : MonoBehaviour {
 		}
 	}
 
-    public void FireCurrentWeapon() //TODO: Fire upwards? 
+    public void FireCurrentWeapon() 
     {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();

@@ -26,6 +26,11 @@ public class SceneLoader : MonoBehaviour {
     private void LoadPlayer()
     {
         GameObject characterToLoad = playerSwitcher.getCharacter;
+		if (playerStats.getCharIndex == 0)
+		{
+			playerMovement.maxJumpes = 2;
+			playerMovement.remainingJumps = 2;
+		}
 		characterToLoad.SetActive(true);
 		playerMovement.InitialLoad();
 		playerFire.InitialLoad();
