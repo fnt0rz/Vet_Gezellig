@@ -264,7 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatTime: 10
   isGrounded: 0
-  speed: 4
+  speed: 5
   jumpPower: 14
   moveEnabled: 1
   maxJumpes: 1
