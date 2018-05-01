@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour {
 	[SerializeField] float playerLives = 1f;
 	float currentHealthPoints = 3f;
 	bool playerIsAlive = true;
-	int characterIndex; 
+	[SerializeField] int characterIndex; 
 
 	public delegate void PlayerDeath(float remainingLives);
 	public event PlayerDeath playerDeath;

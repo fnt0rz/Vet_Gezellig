@@ -13,11 +13,14 @@ public class KamikazePigeon : MonoBehaviour {
 	[SerializeField] int forwardForce = 400;
 	Animator animator;
 	PlayerSwitcher playerSwitcher;
+
+	private void OnEnable() {
+		playerSwitcher = FindObjectOfType<PlayerSwitcher>();
+		playerSwitcher.playerSwitch += RefreshAnimator;		
+	}
 	
 	public void Start() {
 		animator = GetComponentInChildren<Animator>();
-		playerSwitcher = FindObjectOfType<PlayerSwitcher>();
-		playerSwitcher.playerSwitch += RefreshAnimator;
 		fireLocation = transform.Find("WeaponLocation");
 	}
 	
@@ -59,4 +62,8 @@ public class KamikazePigeon : MonoBehaviour {
         projectile.GetComponent<CollisionHandler>().maxRange = attackRange;
 		projectile.GetComponent<CollisionHandler>().hitDamage = fire2Damage;
     }
+
+	private void OnDisable() {
+		playerSwitcher.playerSwitch -= RefreshAnimator;	
+	}
 }

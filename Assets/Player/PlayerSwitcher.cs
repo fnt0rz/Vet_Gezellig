@@ -10,27 +10,34 @@ public class PlayerSwitcher : MonoBehaviour {
 	CameraFollow cameraFollow;
 	PlayerMovement playerMovement;
 	PlayerStats playerStats;
-	public GameObject[] characterList;
+	public List<GameObject> characterList;
 
 	public delegate void PlayerSwitch();
 	public event PlayerSwitch playerSwitch;
 
 	private void Awake() {
 		playerStats = FindObjectOfType<PlayerStats>();
-		characterList = GameObject.FindGameObjectsWithTag("Character");
-		CharacterSelection();
+		FillList();
+        CharacterSelection();
 	}
 
 	private void Update() {
 		Switchplayer();
 	}
 
-	private void Start() {
-		cameraFollow = FindObjectOfType<CameraFollow>();
-		playerMovement = FindObjectOfType<PlayerMovement>();
-	}
+	private void Start()
+    {
+        cameraFollow = FindObjectOfType<CameraFollow>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
 
-	public GameObject getCharacter {
+    private void FillList()
+    {
+		characterList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Character"));
+		characterList.Sort ((x, y) => x.name.CompareTo (y.name));
+    }
+
+    public GameObject getCharacter {
 		get {
 			return currentCharacter;
 		}
@@ -52,6 +59,10 @@ public class PlayerSwitcher : MonoBehaviour {
 		{
 			currentCharacter = characterList[playerStats.getCharIndex];
 		}
+		else
+		{
+			currentCharacter.SetActive(true);
+		}
 	}
 
     private void Switchplayer()
@@ -68,8 +79,10 @@ public class PlayerSwitcher : MonoBehaviour {
     private void ChangeCharacter()
     {
 		currentCharacter.SetActive(false);
-		playerStats.ChangeCharacterIndex(characterList.Length);
+		playerStats.ChangeCharacterIndex(characterList.Count);
 		currentCharacter = characterList[playerStats.getCharIndex];
 		currentCharacter.SetActive(true);
     }
+
+	
 }

@@ -12,11 +12,14 @@ public class SceneLoader : MonoBehaviour {
 	PlayerMovement playerMovement;
 	FireBall playerFire;
 
-	private void Start() {
+	private void OnEnable() {
 		playerStats = FindObjectOfType<PlayerStats>();
+		playerStats.playerDeath += RespawnHandler;		
+	}
+
+	private void Start() {
 		playerSwitcher = FindObjectOfType<PlayerSwitcher>();
 		playerStats.Respawn();
-		playerStats.playerDeath += RespawnHandler;
 		LoadPlayer();
 	}
 
@@ -38,16 +41,18 @@ public class SceneLoader : MonoBehaviour {
 
     private IEnumerator RespawnPlayer()
     {
-        	screenFade = FindObjectOfType<ScreenFade>();
-			while (screenFade.screenBlack == false)
+        screenFade = FindObjectOfType<ScreenFade>();
+		while (screenFade.screenBlack == false)
 			{
 				yield return new WaitForSeconds(1f);
 			}
-			playerStats.playerDeath -= RespawnHandler;
-			var currentScene = SceneManager.GetActiveScene().buildIndex;
-			SceneManager.LoadScene(currentScene);
+		var currentScene = SceneManager.GetActiveScene().buildIndex;
+		SceneManager.LoadScene(currentScene);
 
     }
+	private void OnDisable() {
+		playerStats.playerDeath -= RespawnHandler;
+	}
 }
 		// game overtext
 		// load main menu

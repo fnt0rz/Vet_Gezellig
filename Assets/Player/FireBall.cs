@@ -14,10 +14,13 @@ public class FireBall : MonoBehaviour {
 	Animator animator;
 	PlayerSwitcher playerSwitcher;
 
-	public void Start() {
-		animator = GetComponentInChildren<Animator>();
+	private void OnEnable() {
 		playerSwitcher = FindObjectOfType<PlayerSwitcher>();
 		playerSwitcher.playerSwitch += RefreshAnimator;
+	}
+
+	public void Start() {
+		animator = GetComponentInChildren<Animator>();
 		fireLocation = transform.Find("WeaponLocation");
 	}
 	
@@ -60,4 +63,7 @@ public class FireBall : MonoBehaviour {
 		projectile.GetComponent<CollisionHandler>().hitDamage = fire2Damage;
     }
 
+	private void OnDisable() {
+		playerSwitcher.playerSwitch -= RefreshAnimator;
+	}
 }

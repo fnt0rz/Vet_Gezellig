@@ -23,6 +23,12 @@ public class PlayerMovement : MonoBehaviour {
     public int remainingJumps;
     PlayerSwitcher playerSwitcher;
     
+    private void OnEnable() {
+        playerSwitcher = FindObjectOfType<PlayerSwitcher>(); 
+        playerStats = FindObjectOfType<PlayerStats>();       
+        playerSwitcher.playerSwitch += RefreshAnimator;
+        playerSwitcher.playerSwitch += ChangeStats;
+    }
 
 
     private void Awake() {
@@ -30,13 +36,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Start() {
-        playerSwitcher = FindObjectOfType<PlayerSwitcher>();
-        playerSwitcher.playerSwitch += ChangeStats;
-        playerSwitcher.playerSwitch += RefreshAnimator;
         facingRight = true;
         animator = GetComponentInChildren<Animator>();
-        playerBody = GetComponent<Rigidbody>();
-        playerStats = FindObjectOfType<PlayerStats>();
+        playerBody = GetComponent<Rigidbody>();  
     }
 
 	void OnCollisionEnter(Collision playerCollider) 
@@ -221,5 +223,10 @@ public class PlayerMovement : MonoBehaviour {
 			default:
 			break;
 		}
+    }
+
+    private void OnDisable() {
+        playerSwitcher.playerSwitch -= ChangeStats;
+        playerSwitcher.playerSwitch -= RefreshAnimator;
     }
 }
