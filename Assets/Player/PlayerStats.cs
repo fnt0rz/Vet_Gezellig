@@ -49,6 +49,10 @@ public class PlayerStats : MonoBehaviour {
 
 	}
 
+	public void HealUp() {
+		currentHealthPoints = maxHealthPoints;
+	}
+
 	private void Awake() {
 		int StatsCount = FindObjectsOfType<PlayerStats>().Length;
 		if (StatsCount > 1)
