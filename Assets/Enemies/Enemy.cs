@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	[SerializeField] float enemyHealth = 3f;
+	public float enemyHealth = 3f;
 	CollisionHandler collisionHandler;
 	bool subscribed;
 
@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour {
     private void GotKilled()
     {
 		// kill effect
+		print("Destroyed by ");
 		collisionHandler.enemyHit -= HitHandler;
 		Destroy(gameObject);
     }
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour {
     private void GotHit(float damage)
     {
 		//hit effect
+		print("got hit for " + damage);
         enemyHealth -= damage;
     }
 

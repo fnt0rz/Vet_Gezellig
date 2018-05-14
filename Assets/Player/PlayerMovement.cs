@@ -14,8 +14,8 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpPower = 14f;
     float doubleJumpPower = 10f;
     Rigidbody playerBody;
-    static Animator animator;
-    float translation;
+    Animator animator;
+    public float translation;
     bool facingRight;
     public bool moveEnabled = true;
     PlayerStats playerStats;
@@ -69,14 +69,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private void moveChecker()
     {
-        if (playerStats.isAlive)
-        {
-            moveEnabled = true;
-        }
-        else
+        if (!playerStats.isAlive)
         {
             moveEnabled = false;
+            playerBody.velocity = Vector3.zero;
         }
+
     }
 
     void FixedUpdate() 
