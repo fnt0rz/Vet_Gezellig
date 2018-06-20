@@ -6,8 +6,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	public float enemyHealth = 3f;
-	CollisionHandler collisionHandler;
+	CollisionHandler[] collisionHandlers;
 	bool subscribed;
+    [SerializeField] List<String> projectiles = new List<String>();
 
 	private void Start() {
 		gameObject.tag = "Enemy";
@@ -29,7 +30,10 @@ public class Enemy : MonoBehaviour {
     {
 		// kill effect
 		print("Destroyed by ");
-		collisionHandler.enemyHit -= HitHandler;
+        foreach (CollisionHandler collisionhandler in collisionHandlers)
+        {
+            collisionhandler.enemyHit -= HitHandler;
+        }
 		Destroy(gameObject);
     }
 
@@ -40,17 +44,18 @@ public class Enemy : MonoBehaviour {
         enemyHealth -= damage;
     }
 
+
     // Update is called once per frame
-    void Update () {
-		collisionHandler = FindObjectOfType<CollisionHandler>();
-		if (collisionHandler != null && !subscribed && !collisionHandler.isEnemy)
-		{	
-			subscribed = true;
-			collisionHandler.enemyHit += HitHandler;
-		}
-		else if(collisionHandler == null && subscribed)
-		{
-			subscribed = false;
-		}
-	}
+    void Update()
+    {
+        collisionHandlers = FindObjectsOfType<CollisionHandler>();
+        foreach (CollisionHandler collisionHandler in collisionHandlers)
+        {
+            if (!projectiles.Contains(collisionHandler.gameObject.name) && !collisionHandler.isEnemy)
+            {
+                projectiles.Add(collisionHandler.gameObject.name);
+                collisionHandler.enemyHit += HitHandler;
+            }
+        }
+    }
 }

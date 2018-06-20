@@ -8,6 +8,7 @@ public class HealthUp : MonoBehaviour {
 
 	private void Start() {
 		playerStats = FindObjectOfType<PlayerStats>();
+        this.tag = "LevelTrigger";
 	}
 
 	private void OnCollisionEnter(Collision other) {

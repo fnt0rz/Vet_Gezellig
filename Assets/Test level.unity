@@ -346,6 +346,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1935224227059874, guid: 0f67fc6a5a74a3b47895ef80b3dd89ea, type: 2}
+      propertyPath: m_Name
+      value: GroundEnemy (2)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f67fc6a5a74a3b47895ef80b3dd89ea, type: 2}
   m_IsPrefabParent: 0
@@ -567,7 +571,7 @@ Prefab:
       propertyPath: m_Text
       value: 'While controlling Saske you can press
 
-        "Alt" to kill enemy''s in the air.'
+        "Z" to kill enemy''s in the air.'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b11f6a0b4c3749943950c5863755c164, type: 2}
@@ -1017,6 +1021,10 @@ Prefab:
     - target: {fileID: 4754429246819810, guid: 0f67fc6a5a74a3b47895ef80b3dd89ea, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935224227059874, guid: 0f67fc6a5a74a3b47895ef80b3dd89ea, type: 2}
+      propertyPath: m_Name
+      value: GroundEnemy (0)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f67fc6a5a74a3b47895ef80b3dd89ea, type: 2}
@@ -1798,7 +1806,7 @@ Prefab:
     - target: {fileID: 102814026382513670, guid: b11f6a0b4c3749943950c5863755c164,
         type: 2}
       propertyPath: m_Text
-      value: Alwin can fire a staight forward with 'Alt'
+      value: Alwin can fire a staight forward with 'Z'
       objectReference: {fileID: 0}
     - target: {fileID: 4572378984694588, guid: b11f6a0b4c3749943950c5863755c164, type: 2}
       propertyPath: m_LocalPosition.x

@@ -11,6 +11,7 @@ public class FireBall : MonoBehaviour {
 	[SerializeField] float attackRange = 10f;
 	[SerializeField] float fire2Damage = 3f;
 	[SerializeField] int forwardForce = 400;
+    int fireballCounter = 0;
 	Animator animator;
 	PlayerSwitcher playerSwitcher;
 
@@ -49,6 +50,8 @@ public class FireBall : MonoBehaviour {
     public void FireCurrentWeapon() 
     {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
+        projectile.name = "Projectile " + fireballCounter;
+        ++fireballCounter;
         var projectileBody = projectile.GetComponent<Rigidbody>();
 		SetProjectileStats(projectile);
 		projectileBody.AddForce(transform.forward * forwardForce);

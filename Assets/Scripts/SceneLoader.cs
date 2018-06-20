@@ -30,11 +30,7 @@ public class SceneLoader : MonoBehaviour {
 		characterToLoad.SetActive(true);
 		playerSwitcher.FirstLoad();
         var playerLoadLocation = playerStats.GetRespawnLocation;
-        if (playerLoadLocation != null)
-        {
-            playerMovement.transform.position = playerLoadLocation;
-        }
-        
+         playerMovement.transform.position = playerLoadLocation;
     }
 
     private void RespawnHandler(float lives) {

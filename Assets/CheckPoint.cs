@@ -13,6 +13,7 @@ public class CheckPoint : MonoBehaviour {
     {
         playerStats = FindObjectOfType<PlayerStats>();
         checkPointDisplay = FindObjectOfType<CheckPointDisplay>();
+        this.tag = "LevelTrigger";
     }
 
 	private void OnTriggerEnter(Collider other) {
@@ -25,6 +26,4 @@ public class CheckPoint : MonoBehaviour {
             triggered = true;
         }
 	}
-
-
 }

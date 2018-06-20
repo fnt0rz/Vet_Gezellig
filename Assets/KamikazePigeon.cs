@@ -11,7 +11,8 @@ public class KamikazePigeon : MonoBehaviour {
 	[SerializeField] float attackRange = 10f;
 	[SerializeField] float fire2Damage = 3f;
 	[SerializeField] int forwardForce = 400;
-	Animator animator;
+    int pigeonCounter = 0;
+    Animator animator;
 	PlayerSwitcher playerSwitcher;
 
 	private void OnEnable() {
@@ -50,7 +51,9 @@ public class KamikazePigeon : MonoBehaviour {
     {
 		var projectile = Instantiate(weaponFire, fireLocation.position, transform.rotation);
         var projectileBody = projectile.GetComponent<Rigidbody>();
-		SetProjectileStats(projectile);
+        projectile.name = "AirProjectile " + pigeonCounter;
+        ++pigeonCounter;
+        SetProjectileStats(projectile);
 		projectileBody.AddForce(transform.up * forwardForce);
 
     }

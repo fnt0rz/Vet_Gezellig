@@ -71,13 +71,15 @@ public class CollisionHandler : MonoBehaviour {
 
     private void EnemyHit(Collider other)
     {
-		if (!isEnemy)
-		{
-			var hit = other.gameObject;
-			var vfx = Instantiate(explosion, transform.position, Quaternion.identity);
-			Destroy(gameObject);
-			Destroy(vfx, 0.5f);
-			enemyHit(hit, hitDamage);
-		}
+        if (!isEnemy)
+        {
+            var hit = other.gameObject;
+            var vfx = Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            Destroy(vfx, 0.5f);
+            print(hit + hitDamage.ToString());
+            enemyHit(hit, hitDamage);
+        }
     }
+
 }
