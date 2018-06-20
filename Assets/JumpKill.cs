@@ -13,7 +13,7 @@ public class JumpKill : MonoBehaviour {
 	private void OnTriggerEnter(Collider other) {
 		if (other.CompareTag("Player"))
 		{
-			print("Destroying");
+			//FIXME: Add effects
 			Destroy(enemy.gameObject);
 		}
 	}

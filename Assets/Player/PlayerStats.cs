@@ -10,9 +10,10 @@ public class PlayerStats : MonoBehaviour {
 	[SerializeField] float playerLives = 1f;
 	float currentHealthPoints = 3f;
 	bool playerIsAlive = true;
-	[SerializeField] int characterIndex; 
+	[SerializeField] int characterIndex;
+    [SerializeField] Vector3 playerRespawnLocation;
 
-	public delegate void PlayerDeath(float remainingLives);
+    public delegate void PlayerDeath(float remainingLives);
 	public event PlayerDeath playerDeath;
 
 	public bool isAlive {
@@ -41,7 +42,14 @@ public class PlayerStats : MonoBehaviour {
 
 	}
 
-		public int getCharIndex
+    public Vector3 GetRespawnLocation
+    {
+        get {
+            return playerRespawnLocation;
+        }
+    }
+
+	public int getCharIndex
 	{
 		get {
 			return characterIndex;
@@ -52,6 +60,11 @@ public class PlayerStats : MonoBehaviour {
 	public void HealUp() {
 		currentHealthPoints = maxHealthPoints;
 	}
+
+    public void setRespawnLocation(Vector3 transform)
+    {
+        playerRespawnLocation = transform;
+    }
 
 	private void Awake() {
 		int StatsCount = FindObjectsOfType<PlayerStats>().Length;

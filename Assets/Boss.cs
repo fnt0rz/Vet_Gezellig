@@ -23,6 +23,7 @@ public class Boss : MonoBehaviour {
 	bool stage2Played = false;
     bool stage3Played = false;
     BossArena bossArena;
+    [SerializeField] float maxBossHp = 20f;
 
 	// Use this for initialization
 	void Start () {
@@ -31,11 +32,11 @@ public class Boss : MonoBehaviour {
 	}
 	
 	private void Update() {
-		if (enemy.enemyHealth <= 60f && !stage2Played)
+		if (enemy.enemyHealth <= (maxBossHp * 0.6) && !stage2Played)
 		{
 			StartStage2();
 		}
-        else if (enemy.enemyHealth <= 20f && !stage3Played)
+        else if (enemy.enemyHealth <= (maxBossHp * 0.2) && !stage3Played)
         {
             TriggerStage3();
         }

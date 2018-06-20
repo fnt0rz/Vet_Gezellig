@@ -19,6 +19,7 @@ public class SceneLoader : MonoBehaviour {
 
 	private void Start() {
 		playerSwitcher = FindObjectOfType<PlayerSwitcher>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
 		playerStats.Respawn();
 		LoadPlayer();
 	}
@@ -28,6 +29,12 @@ public class SceneLoader : MonoBehaviour {
         GameObject characterToLoad = playerSwitcher.getCharacter;
 		characterToLoad.SetActive(true);
 		playerSwitcher.FirstLoad();
+        var playerLoadLocation = playerStats.GetRespawnLocation;
+        if (playerLoadLocation != null)
+        {
+            playerMovement.transform.position = playerLoadLocation;
+        }
+        
     }
 
     private void RespawnHandler(float lives) {
